@@ -1,9 +1,18 @@
 import React from 'react'
 
-const PageLayout = () => {
-  return (
-    <div>PageLayout</div>
-  )
-}
+import { Outlet, Navigate } from 'react-router-dom';
+import { Navigation } from '../Navigation/Navigation';
 
-export default PageLayout
+export const PageLayout = ({ user, onLogout }) => {
+    if (!user) {
+        return <Navigate to="/register" />;
+    }
+    return (
+        <div>
+            <Navigation onLogout={onLogout} />
+            Hello, {user.username}
+            <Outlet />
+        </div>
+    );
+};
+
