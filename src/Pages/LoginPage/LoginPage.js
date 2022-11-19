@@ -39,7 +39,7 @@ const LoginPage = ({ onLogin }) => {
           <Input type="email" placeholder='email'></Input>
           <Input type="password" placeholder="password" ></Input>
           <Button type="submit">Log in</Button>
-          <MutedLink href="#">
+          <MutedLink to='/register' href="#">
             Don't have an account? Register
           </MutedLink> 
         </BoxForm>

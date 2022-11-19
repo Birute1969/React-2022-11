@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { 
     NavContainer,
     NavWrap,
+    Div,
     Nav,
     NavLink,
     ButtonContainer, 
@@ -21,10 +22,16 @@ export const Navigation = ({ onLogout }) => {
     return (
             <NavContainer>
                 <NavWrap>
+                    <NavLink to='/'>
+                        <Div>
+                        <img src={require('../../assets/logo.svg')}
+                        alt="logo"/>
+                        </Div>
+                    </NavLink>
                     
                     <Nav>
-                        <NavLink to="/">Home Page</NavLink>
-                        <NavLink to ="/pages">Add Page</NavLink>
+                        <NavLink to="/" activeStyle>Home Page</NavLink>
+                        <NavLink to ="/pages" activeStye>Add Page</NavLink>
                     </Nav>
                     
                     <ButtonContainer>
@@ -33,8 +40,8 @@ export const Navigation = ({ onLogout }) => {
                         </Button>
                     </ButtonContainer>
                     
-                    <NavLink to="/register">Register Page</NavLink>
-                    <NavLink to="/login">Login Page</NavLink>
+                    <NavLink to="/register" activeStye>Register Page</NavLink>
+                    <NavLink to="/login" activeStye>Login Page</NavLink>
                     
                 </NavWrap>
             </NavContainer>
