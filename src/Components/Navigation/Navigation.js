@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -32,8 +32,10 @@ export const Navigation = ({ onLogout }) => {
                             <span>Logout</span>
                         </Button>
                     </ButtonContainer>
+                    
                     <NavLink to="/register">Register Page</NavLink>
                     <NavLink to="/login">Login Page</NavLink>
+                    
                 </NavWrap>
             </NavContainer>
         )

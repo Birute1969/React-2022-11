@@ -19,7 +19,7 @@ function App() {
   }
 
   const handleLogin = (username) => {
-    setUser({username})
+    setUser({username});
   }
 
   const handleLogout = () => {
@@ -42,20 +42,17 @@ function App() {
                 </Suspense>
               } />
         </Route>
-          
-        <Route>
-          <Route path="/register" element={
-            <Suspense fallback={<div>Loading...</div>}>
-                <RegisterPage onRegister={handleRegister} />
-            </Suspense>
+        
+        <Route path="/register" element={
+          <Suspense fallback={<div>Loading...</div>}>
+              <RegisterPage onRegister={handleRegister} />
+          </Suspense>
           } />
-          <Route path="/pages" element={
-                <Suspense fallback={<div>Loading...</div>}>
-                    <LoginPage onLogin={handleLogin} />
-                </Suspense>
-              } />
-        </Route>
-          
+          <Route path="/login" element={
+          <Suspense fallback={<div>Loading...</div>}>
+              <LoginPage onLogin={handleLogin} />
+          </Suspense>
+          } />
       </Routes>
     </div>
   );
