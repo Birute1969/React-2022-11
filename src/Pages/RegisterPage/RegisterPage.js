@@ -1,9 +1,13 @@
 import React from 'react';
 import { useState, useRef } from 'react';
-import { useNavigate } from 'react-router';
+import { Navigate } from 'react-router';
+//import { useNavigate } from 'react-router';
+import { Navigation } from '../../Components/Navigation/Navigation';
+import { BASE_URL } from '../../Utils/Constant';
 
 import {
   BoxWrapper,
+  H3,
   H1Text,
   SmallText,
   BoxContainer,
@@ -14,55 +18,42 @@ import {
   MutedLink,
 } from "./RegisterPageStyled";
 
-const RegisterPage = ({onRegister}) => {
+const RegisterPage = ({ onRegister }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [registerError, setRegisterError] = useState('');
+  const [registrationSuccessful, setRegistrationMessage] = useState('');
 
-  const emailInputRef = useRef();
-  const passwordInputRef = useRef();
-
-  //ASE_URL = 'https://autumn-delicate-wilderness.glitch.me/v1';
+  //const navigate = useNavigate();
+  
 
   const submitHandler = (event) => {
     event.preventDefault()
-  onRegister(username, email, password);
-      
-  const enteredEmail = emailInputRef.current.value;
-  const enteredPassword = passwordInputRef.current.value;
+    onRegister( email, password);
 
-    //Validation:
-    {/*if (onRegister) {
-
-    } else {
-      fetch ((`${BASE_URL}/auth/register`),
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          email: enteredEmail,
-          password: enteredPassword,
-          returnSecureToken: true
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    ).then(res => {
-      if (res.ok) {
-
+    fetch(`${BASE_URL}/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        //username: username,
+        email: email, 
+        password: password,
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      if (data.err) {
+        setRegisterError(data.err);
       } else {
-        return res.json()
-        .then(data => {
-          let errorMessage = 'User name, e-mail or password incorrect!';
-          console.log(data);
-          alert(error.Message);
-          });
+        setRegistrationMessage(data.lastID)
         }
-      });
-    }*/}
-    navigate('/');
-  };
+      })
+    }
+
 
   const handleUsernameChange= (e) => setUsername(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
@@ -70,6 +61,8 @@ const RegisterPage = ({onRegister}) => {
 
   return (
     <div>
+      <Navigation></Navigation>
+      {registerError && <H3>Error: {registerError} !</H3>}
       <BoxWrapper>
         <H1Text>Welcome!</H1Text>
         <SmallText>Please register to continue!</SmallText>
@@ -80,16 +73,17 @@ const RegisterPage = ({onRegister}) => {
         
         <BoxForm onSubmit={submitHandler}>
           <Input placeholder='Username' onChange={handleUsernameChange}></Input>
-          <Input type="email" placeholder='email' required ref={emailInputRef} 
+          <Input type="email" placeholder='email' required 
           onChange={handleEmailChange}></Input>
-          <Input type="password" placeholder="password" required ref={passwordInputRef} 
+          <Input type="password" placeholder="password" required
           onChange={handlePasswordChange}></Input>
-          <Input type="password" placeholder="Confirm Password" required ref={passwordInputRef} 
+          <Input type="password" placeholder="Confirm Password" required 
           onChange={handlePasswordChange}></Input>
           <Button type="submit">Register</Button>
-          <MutedLink href="/login">
+          {registrationSuccessful ?
+            <MutedLink href="/login">
             Login with existing account
-          </MutedLink> 
+          </MutedLink> :''}
         </BoxForm>
       </BoxContainer>
     </div>

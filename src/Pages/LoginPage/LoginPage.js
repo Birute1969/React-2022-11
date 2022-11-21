@@ -1,8 +1,11 @@
 import React from 'react';
+import { Navigation } from '../../Components/Navigation/Navigation';
 import { useState,useRef } from 'react';
 import { useNavigate } from 'react-router';
+import { BASE_URL } from '../../Utils/Constant';
 import {
   BoxWrapper,
+  H3,
   H1Text,
   SmallText,
   BoxContainer,
@@ -17,49 +20,35 @@ const LoginPage = ({ onLogin }) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loginError, setLoginError] = useState('');
     const navigate = useNavigate();
 
-    const emailInputRef = useRef();
-    const passwordInputRef = useRef();
-
-    const BASE_URL = 'https://autumn-delicate-wilderness.glitch.me/v1';
-
+    
     const submitHandler = (e) => {
         e.preventDefault();
         onLogin(username, email, password);
 
-        const enteredEmail = emailInputRef.current.value;
-        const enteredPassword = passwordInputRef.current.value;
-
-        {/*if (onLogin) {
-
-        } else {
-          fetch ((`${BASE_URL}/auth/login`), 
-          {
-            method: 'POST',
-            body: JSON.stringify({
-              email: enteredEmail,
-              password: enteredPassword,
-              returnSecureToken: true
-            }),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }
-        ).then(res => {
-          if (res.ok) {
-            //....
+        fetch(`${BASE_URL}/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: email, 
+            password: password,
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          if (data.err) {
+            setLoginError(data.err);
           } else {
-            return res.json().then(data => {
-              let errorMessage = 'Authentication failed!';
-              console.log(data);
-              alert(errorMessage);
-            });
+            localStorage.setItem("token", data.token);
+            navigate('/home');
           }
-        });
-        }*/}
-    navigate('/');
-    };
+        })
+      }
 
     const handleUsernameChange= (e) => setUsername(e.target.value);
     const handleEmailChange = (e) => setEmail(e.target.value);
@@ -67,6 +56,8 @@ const LoginPage = ({ onLogin }) => {
 
   return (
     <div>
+      <Navigation></Navigation>
+      {loginError && <H3>Error: {loginError}!</H3>}
       <BoxWrapper>
         <H1Text>Welcome Back!</H1Text>
         <SmallText>Please log in to continue!</SmallText>
@@ -77,9 +68,9 @@ const LoginPage = ({ onLogin }) => {
         
         <BoxForm onSubmit={submitHandler}>
           <Input placeholder='Username' onChange={handleUsernameChange}></Input>
-          <Input type="email" placeholder='email' required ref={emailInputRef} 
+          <Input type="email" placeholder='email' required 
           onChange={handleEmailChange}></Input>
-          <Input type="password" placeholder="password" required ref={passwordInputRef} 
+          <Input type="password" placeholder="password" required  
           onChange={handlePasswordChange}></Input>
           <Button type="submit">Log in</Button>
           <MutedLink to='/register' href="/register">

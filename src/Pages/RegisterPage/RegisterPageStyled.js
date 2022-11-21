@@ -11,6 +11,12 @@ export const BoxWrapper = styled.div`
     align-items: center;
     
 `;
+export const H3 = styled.h3`
+    color: red;
+    background-color: lightgreen ;
+    text-align: center;
+    margin: 20 px;
+`;
 
 export const H1Text = styled.h1`
     width: 100%;
