@@ -31,8 +31,9 @@ const RegisterPage = ({ onRegister }) => {
   const submitHandler = (event) => {
     event.preventDefault()
     onRegister( email, password);
-
-    fetch(`${BASE_URL}/auth/register`, {
+    
+      //Pastaba: nesuveikė:
+    {/*fetch(`${BASE_URL}/auth/register`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -51,9 +52,10 @@ const RegisterPage = ({ onRegister }) => {
       } else {
         setRegistrationMessage(data.lastID)
         }
-      })
+      })*/}
+      
     }
-
+    
 
   const handleUsernameChange= (e) => setUsername(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
@@ -80,10 +82,9 @@ const RegisterPage = ({ onRegister }) => {
           <Input type="password" placeholder="Confirm Password" required 
           onChange={handlePasswordChange}></Input>
           <Button type="submit">Register</Button>
-          {registrationSuccessful ?
             <MutedLink href="/login">
             Login with existing account
-          </MutedLink> :''}
+          </MutedLink>
         </BoxForm>
       </BoxContainer>
     </div>

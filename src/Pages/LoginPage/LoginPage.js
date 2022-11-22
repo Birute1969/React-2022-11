@@ -28,7 +28,8 @@ const LoginPage = ({ onLogin }) => {
         e.preventDefault();
         onLogin(username, email, password);
 
-        fetch(`${BASE_URL}/auth/login`, {
+        //Nesuveikė:
+        {/*fetch(`${BASE_URL}/auth/login`, {
           method: 'POST',
           headers: {
             'Content-type': 'application/json'
@@ -47,7 +48,8 @@ const LoginPage = ({ onLogin }) => {
             localStorage.setItem("token", data.token);
             navigate('/home');
           }
-        })
+        })*/}
+        navigate('/'); 
       }
 
     const handleUsernameChange= (e) => setUsername(e.target.value);
