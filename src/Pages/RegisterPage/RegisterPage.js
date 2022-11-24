@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useRef } from 'react';
 import { Navigate } from 'react-router';
-//import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { Navigation } from '../../Components/Navigation/Navigation';
 import { BASE_URL } from '../../Utils/Constant';
 
@@ -25,7 +25,7 @@ const RegisterPage = ({ onRegister }) => {
   const [registerError, setRegisterError] = useState('');
   const [registrationSuccessful, setRegistrationMessage] = useState('');
 
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   
 
   const submitHandler = (event) => {
@@ -53,7 +53,7 @@ const RegisterPage = ({ onRegister }) => {
         setRegistrationMessage(data.lastID)
         }
       })*/}
-      
+      navigate('/');
     }
     
 

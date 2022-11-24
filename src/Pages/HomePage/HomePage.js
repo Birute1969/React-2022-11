@@ -1,12 +1,14 @@
 import React from 'react';
-import { Wrapper, Title, ButtonDiv } from './HomePageStyled';
+import { Wrapper, Title,H2,H4, ButtonDiv } from './HomePageStyled';
 import { useEffect, useState } from 'react';
+import { BoxContainer, BoxForm, BoxWrapper, MutedLink } from '../RegisterPage/RegisterPageStyled';
 //import { BASE_URL } from '../../utils/constants';
 
 
 const HomePage = () => {
-  const [getError, setGetError] = useState('');
-    const [posts, setPosts] = useState([]);
+    //const [getError, setGetError] = useState('');
+    //const [posts, setPosts] = useState([]);
+    //const [getMessage, setGetMessage] = useState('');
 
             {/*useEffect(() => {
             const token = localStorage.getItem("token");
@@ -19,33 +21,43 @@ const HomePage = () => {
             })
             .then(res => res.json())
             .then(data => {
-                setPosts(data);
+                console.log(data);
             if (data.err) {
                 setGetError(data.err);
             } else {
-                
+                setPosts(posts)
+                setGetMessage(data.response)
             }
         }
         )
     }, []);*/}
   return (
     <Wrapper>
-        <Title>Skills</Title>
-        <div>
-        {getError && <h2 className='Error'>Error: {getError}</h2>}
-                <div className='posts-wrapper'>
-                    {posts.map(data => 
+        <Title>Home page</Title>
+        {/*<BoxWrapper>
+            <BoxForm>
+                {getError && 
+                <H2 className='Error'>Error: {getError}</H2>
+                }
                     <div>
-                        <div className='post' key={Math.random}>
-                            <h2>Skill: {data.title}</h2> 
-                            <p>Skill description: {data.description}</p>
+                        <div>
+                            <H4>{posts.title}</H4> 
+                            <p>{posts.body}</p>
+                            {getMessage ?
+                            <h3>Please choose value</h3> : ''
+                            }
                         </div>
+                        
                     </div>
-                    )}
-                </div>
-        </div>
-
-        <ButtonDiv type="reset">Get Information</ButtonDiv>
+            </BoxForm>
+        </BoxWrapper>*/}
+        <BoxContainer>
+            <ButtonDiv type="reset">Get Information</ButtonDiv>
+            <MutedLink href="/add">
+               Go to Add page
+            </MutedLink>
+        </BoxContainer>
+        
     </Wrapper>
   )
 }

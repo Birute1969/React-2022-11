@@ -48,7 +48,7 @@ function App() {
               <RegisterPage onRegister={handleRegister} />
           </Suspense>
           } />
-          <Route path="/login" element={
+        <Route path="/login" element={
           <Suspense fallback={<div>Loading...</div>}>
               <LoginPage onLogin={handleLogin} />
           </Suspense>
