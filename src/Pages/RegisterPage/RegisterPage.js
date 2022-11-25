@@ -30,18 +30,20 @@ const RegisterPage = ({ onRegister }) => {
 
   const submitHandler = (event) => {
     event.preventDefault()
+    console.log('Register');
     onRegister( email, password);
     
-      //Pastaba: nesuveikė:
-    {/*fetch(`${BASE_URL}/auth/register`, {
+    //Nesuveikė:  
+    fetch(`${BASE_URL}/auth/register`, {
       method: 'POST',
       headers: {
-        'Content-type': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        //username: username,
+        username: username,
         email: email, 
         password: password,
+        returnSecureToken: true,
       })
     })
     .then(res => res.json())
@@ -52,11 +54,11 @@ const RegisterPage = ({ onRegister }) => {
       } else {
         setRegistrationMessage(data.lastID)
         }
-      })*/}
       navigate('/');
+      })
+      
     }
     
-
   const handleUsernameChange= (e) => setUsername(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -64,11 +66,13 @@ const RegisterPage = ({ onRegister }) => {
   return (
     <div>
       <Navigation></Navigation>
-      {registerError && <H3>Error: {registerError} !</H3>}
       <BoxWrapper>
         <H1Text>Welcome!</H1Text>
         <SmallText>Please register to continue!</SmallText>
       </BoxWrapper>
+
+      {registerError && <H3>Error: {registerError} !</H3>}
+      {registrationSuccessful ? <H2>Registration successful!</H2> : ''}
 
       <BoxContainer>
         <H2>Register</H2>
@@ -81,10 +85,13 @@ const RegisterPage = ({ onRegister }) => {
           onChange={handlePasswordChange}></Input>
           <Input type="password" placeholder="Confirm Password" required 
           onChange={handlePasswordChange}></Input>
+          
           <Button type="submit">Register</Button>
+
             <MutedLink href="/login">
-            Login with existing account
-          </MutedLink>
+              Login with existing account
+            </MutedLink>
+
         </BoxForm>
       </BoxContainer>
     </div>

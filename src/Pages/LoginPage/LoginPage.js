@@ -29,14 +29,16 @@ const LoginPage = ({ onLogin }) => {
         onLogin(username, email, password);
 
         //Nesuveikė:
-        {/*fetch(`${BASE_URL}/auth/login`, {
+        fetch(`${BASE_URL}/auth/login`, {
           method: 'POST',
           headers: {
             'Content-type': 'application/json'
           },
           body: JSON.stringify({
+            username: username,
             email: email, 
             password: password,
+            returnSecureToken: true,
           })
         })
         .then(res => res.json())
@@ -48,8 +50,8 @@ const LoginPage = ({ onLogin }) => {
             localStorage.setItem("token", data.token);
             navigate('/home');
           }
-        })*/}
-        navigate('/'); 
+        })
+        ; 
       }
 
     const handleUsernameChange= (e) => setUsername(e.target.value);
@@ -59,11 +61,13 @@ const LoginPage = ({ onLogin }) => {
   return (
     <div>
       <Navigation></Navigation>
-      {loginError && <H3>Error: {loginError}!</H3>}
+      
       <BoxWrapper>
         <H1Text>Welcome Back!</H1Text>
         <SmallText>Please log in to continue!</SmallText>
       </BoxWrapper>
+
+      {loginError && <H3>Error: {loginError}!</H3>}
 
       <BoxContainer>
         <H2>Log in</H2>
@@ -75,9 +79,11 @@ const LoginPage = ({ onLogin }) => {
           <Input type="password" placeholder="password" required  
           onChange={handlePasswordChange}></Input>
           <Button type="submit">Log in</Button>
+
           <MutedLink to='/register' href="/register">
             Don't have an account? Register
           </MutedLink> 
+
         </BoxForm>
       </BoxContainer>
     </div>
