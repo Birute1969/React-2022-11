@@ -43,7 +43,7 @@ const HomePage = () => {
                 {getError && <H2>Error: {getError}</H2>}
                 </>
                 <div>
-                    {posts.map(data => 
+                    {posts.map (data => 
                         <div key={Math.random}>
                             <H4>Skill: {data.title}</H4> 
                             <p>Skill description: {data.description}</p>

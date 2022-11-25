@@ -24,3 +24,9 @@ export const Label = styled.label`
     z-index: 10;
 
 `;
+export const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    background: lightyellow; 
+`;
