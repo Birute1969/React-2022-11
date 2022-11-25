@@ -1,20 +1,22 @@
 import React from 'react';
 import { Wrapper, Title,H2,H4, ButtonDiv } from './HomePageStyled';
 import { useEffect, useState } from 'react';
-import { BoxContainer, BoxForm, BoxWrapper, MutedLink } from '../RegisterPage/RegisterPageStyled';
-//import { BASE_URL } from '../../utils/constants';
+import { BoxContainer, BoxForm, BoxWrapper } from '../RegisterPage/RegisterPageStyled';
+import { BASE_URL } from '../../Utils/Constant';
 
 
 const HomePage = () => {
-    //const [getError, setGetError] = useState('');
-    //const [posts, setPosts] = useState([]);
-    //const [getMessage, setGetMessage] = useState('');
+    const [getError, setGetError] = useState('');
+    const [posts, setPosts] = useState([]);
 
-            {/*useEffect(() => {
+            //Neužkrauna Skilsų:
+            useEffect(() => {
             const token = localStorage.getItem("token");
+            console.log(token);
         
             fetch(`${BASE_URL}/content/skills`, {
-            headers: {
+                //method: 'GET',
+                headers: {
                 'Content-type': 'application/json',
                 Authorization: 'Bearer ' + token
             },
@@ -22,43 +24,35 @@ const HomePage = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                setPosts(data);
             if (data.err) {
                 setGetError(data.err);
             } else {
-                setPosts(posts)
-                setGetMessage(data.response)
+                
             }
         }
         )
-    }, []);*/}
+    }, []);
+
   return (
     <Wrapper>
-        <Title>Home page</Title>
-        {/*<BoxWrapper>
+        <Title>Skills</Title>
+        <BoxWrapper>
             <BoxForm>
-                {getError && 
-                <H2 className='Error'>Error: {getError}</H2>
-                }
-                    <div>
-                        <div>
-                            <H4>{posts.title}</H4> 
-                            <p>{posts.body}</p>
-                            {getMessage ?
-                            <h3>Please choose value</h3> : ''
-                            }
+                <>
+                {getError && <H2>Error: {getError}</H2>}
+                </>
+                <div>
+                    {posts.map(data => 
+                        <div key={Math.random}>
+                            <H4>Skill: {data.title}</H4> 
+                            <p>Skill description: {data.description}</p>
                         </div>
-                        
-                    </div>
+                    )}
+                </div>
             </BoxForm>
-        </BoxWrapper>*/}
-        <BoxContainer>
-            <ButtonDiv type="reset">Get Information</ButtonDiv>
-            <MutedLink href="/add">
-               Go to Add page
-            </MutedLink>
-        </BoxContainer>
-        
-    </Wrapper>
+        </BoxWrapper>
+    </Wrapper>    
   )
 }
 

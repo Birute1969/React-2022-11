@@ -29,11 +29,10 @@ const RegisterPage = ({ onRegister }) => {
   
 
   const submitHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     console.log('Register');
     onRegister( email, password);
     
-    //Nesuveikė:  
     fetch(`${BASE_URL}/auth/register`, {
       method: 'POST',
       headers: {
@@ -43,7 +42,7 @@ const RegisterPage = ({ onRegister }) => {
         username: username,
         email: email, 
         password: password,
-        returnSecureToken: true,
+        //returnSecureToken: true,
       })
     })
     .then(res => res.json())
@@ -54,7 +53,7 @@ const RegisterPage = ({ onRegister }) => {
       } else {
         setRegistrationMessage(data.lastID)
         }
-      navigate('/');
+      navigate('/login');
       })
       
     }
@@ -71,7 +70,7 @@ const RegisterPage = ({ onRegister }) => {
         <SmallText>Please register to continue!</SmallText>
       </BoxWrapper>
 
-      {registerError && <H3>Error: {registerError} !</H3>}
+      {registerError && <H3>Error: {registerError}!</H3>}
       {registrationSuccessful ? <H2>Registration successful!</H2> : ''}
 
       <BoxContainer>
@@ -98,4 +97,4 @@ const RegisterPage = ({ onRegister }) => {
   )
 }
 
-export default RegisterPage
+export default RegisterPage;

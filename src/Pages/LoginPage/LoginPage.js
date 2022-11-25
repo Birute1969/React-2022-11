@@ -22,13 +22,11 @@ const LoginPage = ({ onLogin }) => {
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState('');
     const navigate = useNavigate();
-
     
     const submitHandler = (e) => {
         e.preventDefault();
         onLogin(username, email, password);
 
-        //Nesuveikė:
         fetch(`${BASE_URL}/auth/login`, {
           method: 'POST',
           headers: {
@@ -38,7 +36,6 @@ const LoginPage = ({ onLogin }) => {
             username: username,
             email: email, 
             password: password,
-            returnSecureToken: true,
           })
         })
         .then(res => res.json())
@@ -48,10 +45,9 @@ const LoginPage = ({ onLogin }) => {
             setLoginError(data.err);
           } else {
             localStorage.setItem("token", data.token);
-            navigate('/home');
           }
+          navigate('/');
         })
-        ; 
       }
 
     const handleUsernameChange= (e) => setUsername(e.target.value);
@@ -90,4 +86,4 @@ const LoginPage = ({ onLogin }) => {
   )
 }
 
-export default LoginPage
+export default LoginPage;
