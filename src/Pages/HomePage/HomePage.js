@@ -1,7 +1,7 @@
 import React from 'react';
-import { Wrapper, Title,H2,H4, ButtonDiv } from './HomePageStyled';
+import { Wrapper, Title,H2,H4 } from './HomePageStyled';
 import { useEffect, useState } from 'react';
-import { BoxContainer, BoxForm, BoxWrapper } from '../RegisterPage/RegisterPageStyled';
+import { BoxForm, BoxWrapper } from '../RegisterPage/RegisterPageStyled';
 import { BASE_URL } from '../../Utils/Constant';
 
 

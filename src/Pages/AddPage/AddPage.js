@@ -52,7 +52,7 @@ const AddPage = () => {
       </>
       <Wrapper>
         <Title>
-            Add Page
+            Add Skills
         </Title>
         <BoxContainer>
           <Form onSubmit={handleAdd}>
