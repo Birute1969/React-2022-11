@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const Title = styled.h1`
     color: white;
 `;
@@ -35,6 +34,16 @@ export const ButtonDiv = styled.button`
     box-shadow: 0 15px 15px rgb(0 42 177 / 12%);
     margin-left: 60px;
 `;
+
+export const DivWrapper = styled.div`
+border: 8px solid black;
+border-radius: 10px;
+display: inline-flex;
+margin-top: 30px;
+margin-right: 30px;
+padding: 20px;
+`;
+
 export const H2 = styled.h2`
     color: red;
     background-color: grey;

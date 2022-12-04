@@ -28,5 +28,8 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-    background: lightyellow; 
+    background: lightyellow;
+    margin: 10px;
+    font-size: 16px;
+    padding: 0px 10px;
 `;
